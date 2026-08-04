@@ -1,0 +1,25 @@
+config.menu.name.wise_inventory=Wise Inventory
+
+config.name.ommc.auto_crafting=Auto Crafting
+config.name.ommc.auto_restock=Auto Restock
+config.name.ommc.weapon_switch=Weapon Switch
+
+config.name.ommc.wheel_moving_order=Wheel Moving Order
+
+config.enum.ommc.wheel_moving_order.NONE=None
+config.enum.ommc.wheel_moving_order.DEFAULT=Default
+config.enum.ommc.wheel_moving_order.INVERT=Invert
+
+config.name.ommc.tool_switch_mode=Tool Switch Mode
+
+config.enum.ommc.tool_switch_mode.None=None
+config.enum.ommc.tool_switch_mode.Order=Order
+config.enum.ommc.tool_switch_mode.Durability=Durability Remained
+config.enum.ommc.tool_switch_mode.Material=Material
+
+config.name.ommc.item_sorting_order=Item Sorting Order
+
+config.enum.ommc.item_sorting_order.CREATIVE_INVENTORY=Creative Inventory
+config.enum.ommc.item_sorting_order.ITEM_ID=Item Id
+config.enum.ommc.item_sorting_order.TRANSLATION_KEY=Translation Key
+config.enum.ommc.item_sorting_order.TRANSLATION_RESULT=Translation Result

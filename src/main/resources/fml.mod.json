@@ -1,38 +1,36 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
+  "id": "wise_inventory",
   "version": "${version}",
-  "name": "Example mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "Wise Inventory",
+  "description": "Make inventory wise",
   "authors": [
-    "Me!"
+    "Debris",
+    "Xy_Luce"
   ],
   "contact": {
     "homepage": "https://minecraftistooeasy.github.io/",
-    "sources": "https://github.com/MinecraftIsTooEasy/fish-example-mod"
+    "sources": "https://github.com/MinecraftIsTooEasy/Wise-Inventory"
   },
   "license": "CC0-1.0",
-  "icon": "assets/modid/icon.png",
-  "environment": "*",
+  "icon": "assets/wise_inventory/icon.png",
+  "environment": "client",
   "entrypoints": {
-    "main": [
-      "com.example.ExampleMod"
-    ],
-    "registry": [
-      "com.example.register.ExampleRegistryInit"
+    "client": [
+      "moddedmite.wiseinventory.WiseInventory"
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+    "wise_inventory.mixins.json"
   ],
   "depends": {
     "fishmodloader": ">=3.4.0",
     "minecraft": "1.6.4-mite",
     "java": ">=17",
-    "rusted_iron_core": ">=1.3.5"
+    "many-lib": "*"
   },
-  "suggests": {
-    "another-mod": "*"
+  "breaks": {
+    "ommc": "<1.4.5"
   },
-  "accessWidener": "modid.accesswidener"
+  "accessWidener": "wise_inventory.accesswidener"
 }

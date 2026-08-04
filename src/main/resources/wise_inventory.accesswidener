@@ -1,0 +1,7 @@
+accessWidener v2 named
+
+accessible field net/minecraft/GuiContainer theSlot Lnet/minecraft/Slot;
+accessible method net/minecraft/GuiContainer mouseClicked (III)V
+accessible field net/minecraft/Material durability F
+accessible field net/minecraft/GuiMerchant currentRecipeIndex I
+accessible method net/minecraft/GuiIngameMenu actionPerformed (Lnet/minecraft/GuiButton;)V

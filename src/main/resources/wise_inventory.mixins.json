@@ -1,0 +1,22 @@
+{
+  "required": true,
+  "package": "moddedmite.wiseinventory.mixins",
+  "compatibilityLevel": "JAVA_17",
+  "target": "DEFAULT",
+  "client": [
+    "ContainerMixin",
+    "GuiContainerMixin",
+    "MinecraftMixin",
+    "PlayerControllerMixin",
+    "SlotCraftingMixin",
+    "SlotMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  },
+  "mixins": [
+  ]
+}
