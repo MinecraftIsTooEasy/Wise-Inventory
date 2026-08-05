@@ -33,7 +33,7 @@ public class WiseInventoryConfig extends SimpleConfigs {
     public static final ConfigEnum<SortCategory> ItemSortingOrder = ofEnum("ommc.item_sorting_order", SortCategory.CREATIVE_INVENTORY);
     public static final ConfigBoolean AutoCrafting = ofBoolean("ommc.auto_crafting");
     public static final ConfigBoolean AutoRestock = ConfigFactory.ofBoolean("ommc.auto_restock", true, "使mite内置补货更快");
-    public static final ConfigEnum<ToolSwitchMode> ToolSwitch = ofEnum("ommc.tool_switch_mode", ToolSwitchMode.Order);
+    public static final ConfigEnum<ToolSwitchMode> ToolSwitch = ofEnum("ommc.tool_switch_mode", ToolSwitchMode.None);
     public static final ConfigBoolean WeaponSwitch = ofBoolean("ommc.weapon_switch");
 
 

@@ -1,7 +1,9 @@
 package moddedmite.wiseinventory.feat;
 
 import moddedmite.wiseinventory.config.WiseInventoryConfig;
+import moddedmite.wiseinventory.inventory.InventoryTweaks;
 import moddedmite.wiseinventory.inventory.InventoryUtil;
+import moddedmite.wiseinventory.inventory.SlotActionType;
 import moddedmite.wiseinventory.inventory.section.ContainerSection;
 import moddedmite.wiseinventory.inventory.section.EnumSection;
 import net.minecraft.*;
@@ -9,57 +11,41 @@ import net.minecraft.*;
 import java.util.List;
 
 public class BetterQuickMoving {
-    public static void onQuickMove(int index, int button) {
-        if (button == 0 && WiseInventoryConfig.BetterQuickMoving.getBooleanValue()) {
 
-            GuiContainer guiContainer = InventoryUtil.getGuiContainer();
-            Slot slot = InventoryUtil.getSlots().get(index);
+    public static boolean shouldCancelClick(int index, int button, int clickType) {
+        if (button != 0) return false;
+        if (clickType != SlotActionType.QUICK_MOVE.ordinal()) return false;
+        if (!WiseInventoryConfig.BetterQuickMoving.getBooleanValue()) return false;
+        return onQuickMove(index);
+    }
 
-            if (!slot.getHasStack()) return;
+    @SuppressWarnings("RedundantIfStatement")
+    private static boolean onQuickMove(int index) {
+        GuiContainer guiContainer = InventoryUtil.getGuiContainer();
+        Slot slot = InventoryUtil.getSlots().get(index);
 
-            if (guiContainer instanceof GuiCrafting) {
+        if (!slot.getHasStack()) return false;
 
-                ContainerSection craftMatrix = EnumSection.CraftMatrix.get();
-                if (craftMatrix.hasSlot(slot)) {
-                    EnumSection.InventoryWhole.get().moveToEmpty(slot);
-                } else {// player inventory
-                    craftMatrix.moveToEmpty(slot);
-                }
-
-                return;
-            }
-
-            if (guiContainer instanceof GuiEnchantment) {
-
-                if (slot.getStack().isEnchantable()) return;// for vanilla clicking
-                ContainerSection inventoryStorage = EnumSection.InventoryStorage.get();
-                if (inventoryStorage.hasSlot(slot)) {
-                    EnumSection.InventoryHotBar.get().moveToEmpty(slot);
-                } else {
-                    inventoryStorage.moveToEmpty(slot);
-                }
-
-                return;
-            }
-
-            if (guiContainer instanceof GuiMerchant) {
-
-                ContainerSection merchantInSection = EnumSection.MerchantIn.get();
-                if (merchantInSection.hasSlot(slot) || EnumSection.MerchantOut.get().hasSlot(slot)) {
-                    return;// for vanilla clicking
-                }
-                List<Slot> slots = merchantInSection.slots();
-                Slot emptyMerchantSlot = slots.get(0);
-                if (emptyMerchantSlot.getHasStack()) {
-                    emptyMerchantSlot = slots.get(1);
-                    if (emptyMerchantSlot.getHasStack()) {
-                        return;
-                    }
-                }
-                InventoryUtil.moveToEmpty(slot, emptyMerchantSlot);
-
-            }
-
+        if (guiContainer instanceof GuiCrafting) {
+            ContainerSection craftMatrix = EnumSection.CraftMatrix.get();
+            ContainerSection inventory = EnumSection.InventoryWhole.get();
+            if (inventory.hasSlot(slot) && InventoryTweaks.quickMove(slot, craftMatrix)) return true;
         }
+
+        if (guiContainer instanceof GuiEnchantment) {
+            if (slot.getStack().isEnchantable()) return false;// for vanilla clicking
+            ContainerSection inventoryStorage = EnumSection.InventoryStorage.get();
+            ContainerSection inventoryHotBar = EnumSection.InventoryHotBar.get();
+            if (inventoryStorage.hasSlot(slot) && InventoryTweaks.quickMove(slot, inventoryHotBar)) return true;
+            if (inventoryHotBar.hasSlot(slot) && InventoryTweaks.quickMove(slot, inventoryStorage)) return true;
+        }
+
+        if (guiContainer instanceof GuiMerchant) {
+            ContainerSection merchantInSection = EnumSection.MerchantIn.get();
+            ContainerSection inventory = EnumSection.InventoryWhole.get();
+            if (inventory.hasSlot(slot) && InventoryTweaks.quickMove(slot, merchantInSection)) return true;
+        }
+
+        return false;
     }
 }

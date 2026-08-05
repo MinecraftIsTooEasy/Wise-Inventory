@@ -10,7 +10,9 @@ import moddedmite.wiseinventory.inventory.section.SectionHandler;
 import moddedmite.wiseinventory.util.ItemUtil;
 import net.minecraft.*;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
 
 public class InventoryTweaks {
     public static final Set<Integer> BUTTON_UP_CANCEL_SET = new HashSet<>();
@@ -125,5 +127,13 @@ public class InventoryTweaks {
                 InventoryUtil.dropHeldItem();// just drop
             }
         }
+    }
+
+    public static boolean quickMove(Slot slot, ContainerSection destination) {
+        if (!slot.getHasStack()) return false;
+        if (InventoryUtil.isHoldingItem()) return false;
+        InventoryUtil.leftClick(slot);
+        clearCursor(destination);
+        return true;
     }
 }

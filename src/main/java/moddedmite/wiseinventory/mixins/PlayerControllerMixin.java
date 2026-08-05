@@ -2,7 +2,6 @@ package moddedmite.wiseinventory.mixins;
 
 import moddedmite.wiseinventory.config.WiseInventoryConfig;
 import moddedmite.wiseinventory.feat.BetterQuickMoving;
-import moddedmite.wiseinventory.inventory.SlotActionType;
 import net.minecraft.EntityPlayer;
 import net.minecraft.ItemStack;
 import net.minecraft.PlayerControllerMP;
@@ -13,10 +12,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(PlayerControllerMP.class)
 public class PlayerControllerMixin {
-    @Inject(method = "windowClick", at = @At("HEAD"))
+    @Inject(method = "windowClick", at = @At("HEAD"), cancellable = true)
     private void onClick(int windowID, int index, int button, int clickType, EntityPlayer clientPlayer, CallbackInfoReturnable<ItemStack> cir) {
-        if (clickType == SlotActionType.QUICK_MOVE.ordinal()) {
-            BetterQuickMoving.onQuickMove(index, button);
+        if (BetterQuickMoving.shouldCancelClick(index, button, clickType)) {
+            cir.setReturnValue(null);
         }
     }
 

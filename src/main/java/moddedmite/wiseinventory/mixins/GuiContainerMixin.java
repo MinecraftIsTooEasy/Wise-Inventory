@@ -55,7 +55,7 @@ public abstract class GuiContainerMixin extends GuiScreen {
     @Inject(method = "keyTyped", at = @At(value = "INVOKE", target = "Lnet/minecraft/EntityClientPlayerMP;closeScreen()V"))
     private void onCloseScreen(char typedChar, int keyCode, CallbackInfo ci) {
         if (WiseInventoryConfig.BetterCursorItem.getBooleanValue()) {
-            InventoryTweaks.clearCursor(EnumSection.InventoryWhole.get().reverse());
+            InventoryTweaks.clearCursor(EnumSection.InventoryWhole.get());
         }
     }
 }
