@@ -17,6 +17,7 @@ config.enum.ommc.tool_switch_mode.Order=Order
 config.enum.ommc.tool_switch_mode.Durability=Durability Remained
 config.enum.ommc.tool_switch_mode.Material=Material
 
+config.name.ommc.cached_sorting=Cached Sorting
 config.name.ommc.item_sorting_order=Item Sorting Order
 
 config.enum.ommc.item_sorting_order.CREATIVE_INVENTORY=Creative Inventory

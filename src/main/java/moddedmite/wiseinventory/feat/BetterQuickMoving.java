@@ -22,7 +22,11 @@ public class BetterQuickMoving {
     @SuppressWarnings("RedundantIfStatement")
     private static boolean onQuickMove(int index) {
         GuiContainer guiContainer = InventoryUtil.getGuiContainer();
-        Slot slot = InventoryUtil.getSlots().get(index);
+        List<Slot> slots = InventoryUtil.getSlots();
+
+        if (index < 0 || index >= slots.size()) return false;// somehow -1 occurs
+
+        Slot slot = slots.get(index);
 
         if (!slot.getHasStack()) return false;
 

@@ -17,6 +17,7 @@ config.enum.ommc.tool_switch_mode.Order=顺序
 config.enum.ommc.tool_switch_mode.Durability=剩余耐久
 config.enum.ommc.tool_switch_mode.Material=材料
 
+config.name.ommc.cached_sorting=整理时使用缓存算法
 config.name.ommc.item_sorting_order=物品整理顺序
 
 config.enum.ommc.item_sorting_order.CREATIVE_INVENTORY=创造模式物品栏

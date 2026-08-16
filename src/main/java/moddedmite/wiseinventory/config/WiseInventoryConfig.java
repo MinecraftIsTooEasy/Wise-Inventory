@@ -30,6 +30,7 @@ public class WiseInventoryConfig extends SimpleConfigs {
     public static final ConfigEnum<WheelMovingMode> WheelMoving = ofEnum("ommc.wheel_moving_order", WheelMovingMode.DEFAULT);
     public static final ConfigBoolean BetterQuickMoving = ConfigFactory.ofBoolean("更好的快速移动", true, "例如将物品送入工作台");
     public static final ConfigBoolean BetterCursorItem = ConfigFactory.ofBoolean("更好的光标物品", true, "关闭屏幕时不再丢出");
+    public static final ConfigBoolean CachedSorting = ConfigFactory.ofBoolean("ommc.cached_sorting", true, "相比直接操作, 可减少发包");
     public static final ConfigEnum<SortCategory> ItemSortingOrder = ofEnum("ommc.item_sorting_order", SortCategory.CREATIVE_INVENTORY);
     public static final ConfigBoolean AutoCrafting = ofBoolean("ommc.auto_crafting");
     public static final ConfigBoolean AutoRestock = ConfigFactory.ofBoolean("ommc.auto_restock", true, "使mite内置补货更快");
@@ -64,6 +65,7 @@ public class WiseInventoryConfig extends SimpleConfigs {
                 WheelMoving,
                 BetterQuickMoving,
                 BetterCursorItem,
+                CachedSorting,
                 ItemSortingOrder,
                 AutoCrafting,
                 AutoRestock,

@@ -1,10 +1,12 @@
 package moddedmite.wiseinventory.feat;
 
+import moddedmite.wiseinventory.config.WiseInventoryConfig;
 import moddedmite.wiseinventory.inventory.InventoryTweaks;
 import moddedmite.wiseinventory.inventory.InventoryUtil;
 import moddedmite.wiseinventory.inventory.section.ContainerSection;
 import moddedmite.wiseinventory.inventory.section.EnumSection;
 import moddedmite.wiseinventory.inventory.section.SectionHandler;
+import moddedmite.wiseinventory.inventory.sort.Permutations;
 import moddedmite.wiseinventory.inventory.sort.SortCategory;
 import moddedmite.wiseinventory.util.Predicates;
 import moddedmite.wiseinventory.util.SoundUtil;
@@ -80,24 +82,23 @@ public class SortInventory {
         int length = slots.length;
         if (length <= 1) return;
 
-//        if (OMMCConfig.CachedSorting.getBooleanValue()) {
-//            List<PermutationUtil.Transposition> optimal = PermutationUtil.getOptimalProcess(slots, sorter);
-//            optimal.forEach(x -> x.operate(slots, swapAction));
-//        } else {
-        // direct sorting
-        for (int i = 1; i < length; i++) {
-            boolean flag = true;
-            for (int j = 0; j < length - i; j++) {
-                T slotJ = slots[j];
-                T slotJ_1 = slots[j + 1];
-                int compare = sorter.compare(slotJ, slotJ_1);
-                if (compare > 0) {
-                    swapAction.accept(slotJ, slotJ_1);
-                    flag = false;
+        if (WiseInventoryConfig.CachedSorting.getBooleanValue()) {
+            Permutations.ofOptimal(slots, sorter).operate(slots, swapAction);
+        } else {
+            // direct sorting
+            for (int i = 1; i < length; i++) {
+                boolean flag = true;
+                for (int j = 0; j < length - i; j++) {
+                    T slotJ = slots[j];
+                    T slotJ_1 = slots[j + 1];
+                    int compare = sorter.compare(slotJ, slotJ_1);
+                    if (compare > 0) {
+                        swapAction.accept(slotJ, slotJ_1);
+                        flag = false;
+                    }
                 }
+                if (flag) break;
             }
-            if (flag) break;
         }
-//        }
     }
 }
