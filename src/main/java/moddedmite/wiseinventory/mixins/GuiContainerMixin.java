@@ -1,9 +1,9 @@
 package moddedmite.wiseinventory.mixins;
 
 import moddedmite.wiseinventory.config.WiseInventoryConfig;
+import moddedmite.wiseinventory.feat.BetterContainerClosing;
 import moddedmite.wiseinventory.inventory.InventoryTweaks;
 import moddedmite.wiseinventory.inventory.InventoryUtil;
-import moddedmite.wiseinventory.inventory.section.EnumSection;
 import moddedmite.wiseinventory.inventory.section.SectionHandler;
 import moddedmite.wiseinventory.util.ItemUtil;
 import net.minecraft.GuiContainer;
@@ -54,8 +54,7 @@ public abstract class GuiContainerMixin extends GuiScreen {
 
     @Inject(method = "keyTyped", at = @At(value = "INVOKE", target = "Lnet/minecraft/EntityClientPlayerMP;closeScreen()V"))
     private void onCloseScreen(char typedChar, int keyCode, CallbackInfo ci) {
-        if (WiseInventoryConfig.BetterCursorItem.getBooleanValue()) {
-            InventoryTweaks.clearCursor(EnumSection.InventoryWhole.get());
-        }
+        BetterContainerClosing.onCloseScreen();
     }
+
 }

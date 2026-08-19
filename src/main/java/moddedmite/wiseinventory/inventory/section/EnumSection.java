@@ -53,7 +53,22 @@ public enum EnumSection {
     FakePlayerEnderChestActions,
     FakePlayerEnderChestInventory,
 
-    Unidentified,
+    Unidentified,// Generally, it is a simple section like chest or shulker box, or absent in special containers that already identified in SectionIdentifier.
+
+    Container {// Those slots in current container that are not for player inventory.
+
+        @SuppressWarnings("RedundantIfStatement")
+        @Override
+        public ContainerSection get() {
+            return SectionHandler.streamAllSections()
+                    .filter(section -> {
+                        if (section.isOf(EnumSection.InventoryHotBar)) return false;
+                        if (section.isOf(EnumSection.InventoryStorage)) return false;
+                        return true;
+                    })
+                    .reduce(ContainerSection::mergeWith).orElse(ContainerSection.EMPTY);
+        }
+    },
     ;
 
     public ContainerSection get() {

@@ -29,7 +29,7 @@ public class WiseInventoryConfig extends SimpleConfigs {
     public static final ConfigBoolean ContinuousOperation = new ConfigBoolean("连续操作", true, "长按Shift和左键时能连续移动物品");
     public static final ConfigEnum<WheelMovingMode> WheelMoving = ofEnum("ommc.wheel_moving_order", WheelMovingMode.DEFAULT);
     public static final ConfigBoolean BetterQuickMoving = ConfigFactory.ofBoolean("更好的快速移动", true, "例如将物品送入工作台");
-    public static final ConfigBoolean BetterCursorItem = ConfigFactory.ofBoolean("更好的光标物品", true, "关闭屏幕时不再丢出");
+    public static final ConfigBoolean BetterContainerClosing = ConfigFactory.ofBoolean("更好的关闭容器", true, "关闭屏幕时不再丢出");
     public static final ConfigBoolean CachedSorting = ConfigFactory.ofBoolean("ommc.cached_sorting", true, "相比直接操作, 可减少发包");
     public static final ConfigEnum<SortCategory> ItemSortingOrder = ofEnum("ommc.item_sorting_order", SortCategory.CREATIVE_INVENTORY);
     public static final ConfigBoolean AutoCrafting = ofBoolean("ommc.auto_crafting");
@@ -64,7 +64,7 @@ public class WiseInventoryConfig extends SimpleConfigs {
                 ContinuousOperation,
                 WheelMoving,
                 BetterQuickMoving,
-                BetterCursorItem,
+                BetterContainerClosing,
                 CachedSorting,
                 ItemSortingOrder,
                 AutoCrafting,

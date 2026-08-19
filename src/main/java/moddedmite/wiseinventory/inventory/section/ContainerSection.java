@@ -30,9 +30,9 @@ public record ContainerSection(List<Slot> slots) {
         return 0;
     }
 
-//    public Slot getFirstSlot() {
-//        return this.slots.getFirst();
-//    }
+    public Slot getFirstSlot() {
+        return this.slots.get(0);
+    }
 
     public Slot getSlot(int index) {
         return this.slots.get(index);
