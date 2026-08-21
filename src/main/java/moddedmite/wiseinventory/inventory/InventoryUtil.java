@@ -102,6 +102,10 @@ public class InventoryUtil {
         click(index, false, SlotActionType.QUICK_MOVE);
     }
 
+    public static void quickMoveIfPossible(Slot slot) {
+        if (hasItem(slot)) quickMove(slot);
+    }
+
     public static void startSpreading(boolean rightClick) {
         clickSlot(-999, Container.func_94534_d(0, rightClick ? 1 : 0), SlotActionType.QUICK_CRAFT);
     }
@@ -187,6 +191,18 @@ public class InventoryUtil {
 //        } else {
         return slot.slotNumber;
 //        }
+    }
+
+    public static boolean isEmpty(Slot slot) {
+        return !slot.getHasStack();
+    }
+
+    public static boolean hasItem(Slot slot) {
+        return slot.getHasStack();
+    }
+
+    public static ItemStack getStack(Slot slot) {
+        return slot.getStack();
     }
 
     public static List<Slot> getSlots() {

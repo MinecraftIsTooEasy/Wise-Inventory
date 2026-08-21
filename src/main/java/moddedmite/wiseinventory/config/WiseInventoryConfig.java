@@ -41,11 +41,11 @@ public class WiseInventoryConfig extends SimpleConfigs {
     //hotkeys
     public static final ConfigHotkey OpenConfigScreen = ofHotkey("打开配置屏幕", KeyCodes.getStorageString(Keyboard.KEY_I, Keyboard.KEY_C));
     public static final ConfigHotkey SortInventory = ofHotkey("整理物品栏", KeybindMulti.fromStorageString("R", KeybindSettings.GUI), "按区域进行, 自动兼容几乎所有模组");
-    public static final ConfigHotkey DropSimilar = ofHotkey("丢出类似物品", createKeyForGui(Keyboard.KEY_LSHIFT, Keyboard.KEY_Q), null);
+    public static final ConfigHotkey DropSimilar = ofHotkey("丢出相同物品", createKeyForGui(Keyboard.KEY_LSHIFT, Keyboard.KEY_Q), null);
     public static final ConfigHotkey ThrowSection = ofHotkey("清空区域", createKeyForGui(Keyboard.KEY_SPACE, Keyboard.KEY_Q), "全部丢出");
     public static final ConfigHotkey TradingRestock = ofHotkey("交易补货", createKeyForModifierGui(Keyboard.KEY_SPACE), "类似高版本空格补货");
 
-    public static final ConfigHotkey ModifierMoveSimilar = ofHotkey("移动类似物品(修饰键)", createKeyForGui(Keyboard.KEY_LCONTROL), "左键并按下可以移动同类物品");
+    public static final ConfigHotkey ModifierMoveSimilar = ofHotkey("移动相同物品(修饰键)", createKeyForGui(Keyboard.KEY_LCONTROL), "左键并按下可以移动相同物品");
     public static final ConfigHotkey ModifierMoveAll = ofHotkey("移动全部(修饰键)", createKeyForGui(Keyboard.KEY_SPACE), "左键并按下可以移动全部物品");
     public static final ConfigHotkey ModifierSpreadItem = ofHotkey("分散物品(修饰键)", createKeyForGui(Keyboard.KEY_LMENU), "按住时点击会尝试将手中物品均分到点击区域全部槽位");
 

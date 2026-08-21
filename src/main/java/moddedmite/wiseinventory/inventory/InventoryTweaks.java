@@ -1,8 +1,6 @@
 package moddedmite.wiseinventory.inventory;
 
 import fi.dy.masa.malilib.util.GuiUtils;
-import moddedmite.wiseinventory.config.WiseInventoryConfig;
-import moddedmite.wiseinventory.feat.ContinuousOperation;
 import moddedmite.wiseinventory.feat.WheelMoving;
 import moddedmite.wiseinventory.inventory.section.ContainerSection;
 import moddedmite.wiseinventory.inventory.section.EnumSection;
@@ -10,12 +8,9 @@ import moddedmite.wiseinventory.inventory.section.SectionHandler;
 import moddedmite.wiseinventory.util.ItemUtil;
 import net.minecraft.*;
 
-import java.util.HashSet;
 import java.util.Optional;
-import java.util.Set;
 
 public class InventoryTweaks {
-    public static final Set<Integer> BUTTON_UP_CANCEL_SET = new HashSet<>();
 
     public static boolean shouldDoTrick(GuiContainer guiContainer, Slot mouseOver) {
         return mouseOver != null && mouseOver.getHasStack() && !(guiContainer instanceof GuiContainerCreative);
@@ -28,43 +23,12 @@ public class InventoryTweaks {
         return section;
     }
 
-    public static boolean shouldCancelLeftClick(GuiContainer guiContainer, Slot mouseOver) {
-        if (mouseOver == null) return false;
-        if (guiContainer instanceof GuiContainerCreative) return false;
-
-        ContainerSection section = SectionHandler.getSection(mouseOver);
-        if (tryMoveSimilar()) {
-            return true;
-        }
-        if (WiseInventoryConfig.ModifierMoveAll.getKeybind().isKeybindHeld()) {
-            InventoryUtil.putHeldItemDown(section);
-            section.notEmptyRun(InventoryUtil::quickMove);
-            return true;
-        }
-        if (WiseInventoryConfig.ModifierSpreadItem.getKeybind().isKeybindHeld() && trySpreading(false)) {
-            BUTTON_UP_CANCEL_SET.add(0);
-            return true;
-        }
-        return false;
-    }
-
-    public static boolean shouldCancelRightClick(GuiContainer guiContainer, Slot mouseOver) {
-        if (mouseOver == null) return false;
-        if (guiContainer instanceof GuiContainerCreative) return false;
-
-        if (WiseInventoryConfig.ModifierSpreadItem.getKeybind().isKeybindHeld() && trySpreading(true)) {
-            BUTTON_UP_CANCEL_SET.add(1);
-            return true;
-        }
-        return false;
-    }
-
     public static void onRender(GuiContainer guiContainer, int mouseX, int mouseY, Slot mouseOver) {
         if (!shouldDoTrick(guiContainer, mouseOver)) return;
 
-        if (WiseInventoryConfig.ContinuousOperation.getBooleanValue()) {
-            ContinuousOperation.quickMoving(guiContainer, mouseX, mouseY, mouseOver);
-        }
+//        if (WiseInventoryConfig.ContinuousOperation.getBooleanValue()) {
+//            ContinuousOperation.legacyQuickMoving(guiContainer, mouseX, mouseY, mouseOver);
+//        }
 
         WheelMoving.onRender(mouseOver);
     }
@@ -83,19 +47,15 @@ public class InventoryTweaks {
         return true;
     }
 
-    public static boolean tryMoveSimilar() {
-        if (WiseInventoryConfig.ModifierMoveSimilar.getKeybind().isKeybindHeld()) {
-            InventoryUtil.getSlotMouseOver().ifPresent(slot -> {
-                if (slot.getHasStack()) {
-                    ItemStack template = slot.getStack().copy();
-                    ContainerSection section = SectionHandler.getSection(slot);
-                    section = expandSectionIfPossible(section);
-                    section.predicateRun(ItemUtil.predicateIDMeta(template), InventoryUtil::quickMove);
-                }
-            });
-            return true;
-        }
-        return false;
+    public static void tryMoveSimilar() {
+        InventoryUtil.getSlotMouseOver().ifPresent(slot -> {
+            if (slot.getHasStack()) {
+                ItemStack template = slot.getStack().copy();
+                ContainerSection section = SectionHandler.getSection(slot);
+                section = expandSectionIfPossible(section);
+                section.predicateRun(ItemUtil.predicateIDMeta(template), InventoryUtil::quickMove);
+            }
+        });
     }
 
     public static boolean tryThrowSection() {
