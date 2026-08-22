@@ -182,15 +182,13 @@ public class InventoryUtil {
     }
 
     public static Optional<Slot> getSlotMouseOver() {
-        return Optional.ofNullable(getGuiContainer().theSlot);
+        GuiScreen screen = getClient().currentScreen;
+        if (screen instanceof GuiContainer guiContainer) return Optional.ofNullable(guiContainer.theSlot);
+        return Optional.empty();
     }
 
     public static int getSlotId(Slot slot) {
-//        if (slot instanceof CreativeInventoryScreen.CreativeSlot creativeSlot) {
-//            return creativeSlot.slot.id;
-//        } else {
         return slot.slotNumber;
-//        }
     }
 
     public static boolean isEmpty(Slot slot) {

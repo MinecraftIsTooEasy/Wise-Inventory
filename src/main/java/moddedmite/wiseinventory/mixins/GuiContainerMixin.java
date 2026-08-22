@@ -30,14 +30,14 @@ public abstract class GuiContainerMixin extends GuiScreen {
 
     @Inject(method = "mouseMovedOrUp", at = @At("HEAD"), cancellable = true)
     private void cancelRelease(int mouseX, int mouseY, int mouseButton, CallbackInfo ci) {
-        if (TempInputHandler.shouldCancelRelease(mouseButton)) {
+        if (TempInputHandler.shouldCancelRelease((GuiContainer) (Object) this, mouseButton)) {
             ci.cancel();
         }
     }
 
     @Inject(method = "mouseClickMove", at = @At("HEAD"), cancellable = true)
     private void onMouseMove(int par1, int par2, int par3, long par4, CallbackInfo ci) {
-        TempInputHandler.mouseMoved(par1, par2);
+        TempInputHandler.mouseMoved((GuiContainer) (Object) this,par1, par2);
     }
 
     @Inject(method = "drawScreen", at = @At("RETURN"))
@@ -56,7 +56,7 @@ public abstract class GuiContainerMixin extends GuiScreen {
 
     @Inject(method = "keyTyped", at = @At(value = "INVOKE", target = "Lnet/minecraft/EntityClientPlayerMP;closeScreen()V"))
     private void onCloseScreen(char typedChar, int keyCode, CallbackInfo ci) {
-        BetterContainerClosing.onCloseScreen();
+        BetterContainerClosing.onCloseScreen((GuiContainer) (Object) this);
     }
 
 }

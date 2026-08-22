@@ -6,16 +6,18 @@ import moddedmite.wiseinventory.inventory.InventoryUtil;
 import moddedmite.wiseinventory.inventory.SlotActionType;
 import moddedmite.wiseinventory.inventory.section.ContainerSection;
 import moddedmite.wiseinventory.inventory.section.EnumSection;
+import moddedmite.wiseinventory.util.Predicates;
 import net.minecraft.*;
 
 import java.util.List;
 
 public class BetterQuickMoving {
 
-    public static boolean shouldCancelClick(int index, int button, int clickType) {
+    public static boolean shouldCancelClick(Minecraft client, int index, int button, int clickType) {
         if (button != 0) return false;
         if (clickType != SlotActionType.QUICK_MOVE.ordinal()) return false;
         if (!WiseInventoryConfig.BetterQuickMoving.getBooleanValue()) return false;
+        if (Predicates.notInGuiContainer(client)) return false;
         return onQuickMove(index);
     }
 

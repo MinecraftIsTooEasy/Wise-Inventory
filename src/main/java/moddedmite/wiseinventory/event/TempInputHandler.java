@@ -63,7 +63,7 @@ public class TempInputHandler {
         BUTTON_UP_CANCEL_SET.add(eventButton);
     }
 
-    public static boolean shouldCancelRelease(int eventButton) {
+    public static boolean shouldCancelRelease(GuiContainer guiContainer, int eventButton) {
         if (eventButton == 0) {
 
             if (Predicates.notInGuiContainer(Minecraft.getMinecraft()))
@@ -78,7 +78,7 @@ public class TempInputHandler {
         return false;
     }
 
-    public static void mouseMoved(int mouseX, int mouseY) {
+    public static void mouseMoved(GuiContainer guiContainer, int mouseX, int mouseY) {
         if (Predicates.notInGuiContainer(Minecraft.getMinecraft())) return;// the below assuming valid environment
 
         ContinuousOperation.mouseMove();
