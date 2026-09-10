@@ -13,7 +13,9 @@ public class ClickCraftTask extends AbstractTimedTask {
 
     @Override
     public boolean shouldExecute(Minecraft client) {
-        return client.currentScreen instanceof GuiCrafting && super.shouldExecute(client);
+        return super.shouldExecute(client)
+                && client.currentScreen instanceof GuiCrafting
+                && !Minecraft.getMinecraft().thePlayer.crafting_proceed;
     }
 
     @Override

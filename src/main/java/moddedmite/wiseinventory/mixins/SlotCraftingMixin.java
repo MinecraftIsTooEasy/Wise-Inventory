@@ -1,7 +1,6 @@
 package moddedmite.wiseinventory.mixins;
 
 import moddedmite.wiseinventory.WiseInventory;
-import moddedmite.wiseinventory.config.WiseInventoryConfig;
 import moddedmite.wiseinventory.feat.AutoCrafting;
 import net.minecraft.*;
 import org.spongepowered.asm.mixin.Mixin;
@@ -41,6 +40,6 @@ public abstract class SlotCraftingMixin extends Slot {
 
     @Unique
     private boolean shouldAutoCraft() {
-        return this.thePlayer.onClient() && WiseInventoryConfig.AutoCrafting.getBooleanValue() && Minecraft.getMinecraft().currentScreen instanceof GuiCrafting;
+        return this.thePlayer.onClient() && AutoCrafting.isActive();
     }
 }
